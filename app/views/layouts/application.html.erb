@@ -12,9 +12,11 @@
   <body>
     <nav class="orange darken-4">
       <div class="nav-wrapper">
-        <a href="/products" class="brand-logo left" style="margin-left: 50px;">FreeStuff</a>
+        <a href="/" class="brand-logo left" style="margin-left: 50px;">FreeStuff</a>
         <ul class="right">
           <% if current_user %>
+            <li><a href="/messages">Messages <span class="new badge orange darken-4">0</span></a></li>
+            <li><a href="/products" class="center">Products</a></li>
             <li><a href="#!" class="dropdown-button" data-activates="menudrop"><%=current_user.first_name%><i class="material-icons right">view_list</i></a></li>
               <ul id="menudrop" class="dropdown-content" width="100" style="margin-top:65px;">
                 <li><a href="/users/<%=current_user.id%>">Profile</a></li>

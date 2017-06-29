@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Edit Product</h2>
+  <div class="row">
+    <form class="col s12" action="/products/<%=@product.id%>" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="_method" value="patch">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="product[user_id]" value="<%=current_user.id%>">
+      <div class="row">
+        <div class="input-field col s6">
+          <input type="text" name="product[name]" value="<%=@product.name%>">
+          <label class="active" for="name">Product Name</label>
+        </div>
+        <div class="file-field input-field col s6">
+          <div class="btn">
+            <span>File</span>
+            <input type="file" name="product[image]">
+          </div>
+          <div class="file-path-wrapper">
+            <input type="text" class="file-path validate">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea id="description" name="product[description]" class="materialize-textarea"><%=@product.description%></textarea>
+              <label class="active" for="description">Description</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s2 offset-s10">
+          <button type="submit" class="btn waves-effect waves-light" name="action">Update</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

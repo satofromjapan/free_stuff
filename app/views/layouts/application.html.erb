@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Free</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="orange darken-4">
+      <div class="nav-wrapper">
+        <a href="/products" class="brand-logo left" style="margin-left: 50px;">FreeStuff</a>
+        <ul class="right">
+          <% if current_user %>
+            <li><a href="#!" class="dropdown-button" data-activates="menudrop"><%=current_user.first_name%><i class="material-icons right">view_list</i></a></li>
+              <ul id="menudrop" class="dropdown-content" width="100" style="margin-top:65px;">
+                <li><a href="/users/<%=current_user.id%>">Profile</a></li>
+                <li class="divider"></li>
+                <li><%= link_to "Logout", session_path(current_user.id), 'data-method' => :delete %></li>
+              </ul>
+            </li>
+
+          <% else %>
+            <li>
+              <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Login</a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+    <%= yield %>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+     <div class="modal-content">
+       <ul class="collapsible" data-collapsible="accordion">
+         <li>
+           <div class="collapsible-header">Login</div>
+           <div class="collapsible-body">
+             <span>
+               <div class="row">
+                 <form class="col s12" action="/sessions" method="post">
+                   <input type = 'hidden' name = "authenticity_token" value = "<%=form_authenticity_token%>">
+                   <div class="row">
+                     <div class="input-field col s6">
+                       <input type="text" name="email" class="validate">
+                       <label for="email">Email</label>
+                     </div>
+                     <div class="input-field col s6">
+                       <input type="password" name="password" class="validate">
+                       <label for="password">Password</label>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <input type="submit" class="btn waves-effect waves-light right" value="Login">
+                   </div>
+                 </form>
+               </div>
+             </span>
+           </div>
+         </li>
+         <li>
+           <div class="collapsible-header">Register</div>
+           <div class="collapsible-body">
+             <span>
+               <div class="row">
+                 <form class="col s12" action="/users" method="post">
+                   <input type = 'hidden' name = "authenticity_token" value = "<%=form_authenticity_token%>">
+                   <div class="row">
+                     <div class="input-field col s6">
+                       <input type="text" name="user[first_name]" id="first_name" class="validate">
+                       <label for="first_name">First Name</label>
+                     </div>
+                     <div class="input-field col s6">
+                       <input type="text" name="user[last_name]" id="last_name" class="validate">
+                       <label for="last_name">Last Name</label>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="input-field col s12">
+                       <input type="email" name="user[email]" id="email" class="validate">
+                       <label for="email">Email</label>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="input-field col s6">
+                       <input type="password" name="user[password]" id="password" class="validate">
+                       <label for="password">Password</label>
+                     </div>
+                     <div class="input-field col s6">
+                       <input type="password" name="password_confirm" id="password_confirm" class="validate">
+                       <label for="password_confirm">Password Confirmation</label>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="input-field col s12">
+                       <input type="text" name="user[zip]" id="zip">
+                       <label for="zip">Zip Code</label>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <input type="submit" class="btn waves-effect waves-light right" value="Register">
+                   </div>
+                 </form>
+               </div>
+             </span>
+           </div>
+         </li>
+       </ul>
+
+     </div>
+     <div class="modal-footer">
+       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+     </div>
+    </div>
+  </body>
+</html>

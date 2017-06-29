@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>All available products!</h1>
+  <div class="row">
+    <% for prod in @products %>
+    <div class="col s3">
+      <div class="card medium hoverable sticky-action">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img src="<%=prod.image.url(:medium)%>" class="activator">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4 truncate"><%=prod.name%></span>
+          <p>Click for more...</p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"><%=prod.name%><i class="material-icons right">close</i></span>
+          <p><%=prod.description%></p>
+        </div>
+        <div class="card-action">
+          <a href="/products/<%=prod.id%>">Check it out!</a>
+          <% if current_user == prod.user%>
+          <a href="/products/<%=prod.id%>/edit">Edit</a>
+          <%= link_to "Delete", product_path(prod.id), 'data-method' => :delete %>
+          <%end%>
+        </div>
+      </div>
+    </div>
+    <%end%>
+  </div>
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large red pulse" href="/products/new">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+  </div>
+</div>

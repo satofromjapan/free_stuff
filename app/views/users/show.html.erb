@@ -1,0 +1,9 @@
+<div class="container">
+  <ul class="collection with-header">
+    <li class="collect-header"><h4 style="display: inline-block; vertical-align: middle;">Your Profile</h4><small style="display: inline-block; vertical-align: middle; padding-left: 10px;"><a href="/users/<%=current_user.id%>/edit">Edit Profile</a></small></li>
+    <li class="collect-item">First Name: <%=@u.first_name%></li>
+    <li class="collect-item">Last Name: <%=@u.last_name%></li>
+    <li class="collect-item">Email: <%=@u.email%></li>
+    <li class="collect-item">Zip: <%=@u.zip%></li>
+  </ul>
+</div>

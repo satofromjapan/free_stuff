@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Send a message</h1>
+  <div class="row">
+    <form class="col s12" action="/messages" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="message[receiver_id]" value="<%=@product.user.id%>">
+      <input type="hidden" name="message[sender_id]" value="<%=current_user.id%>">
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="text" name="message[title]" value="<%=@product.name%>">
+          <label for="title">Title</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea name="message[content]" class="materialize-textarea"></textarea>
+          <label for="content">Message</label>
+        </div>
+      </div>
+      <div class="row">
+        <button type="submit" name="action" class="btn waves-effect waves-light" onclick="Materialize.toast('Message sent!')">Send <i class="material-icons right">send</i></button>
+      </div>
+    </form>
+  </div>
+</div>

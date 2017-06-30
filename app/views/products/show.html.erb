@@ -7,8 +7,7 @@
     <div class="col s5">
       <div class="card-panel teal center-align">
         <span class="white-text">Send a message to the seller!</span>
-        <a class="saves-effect waves-light btn light-blue" href="/">Message</a>
-        <%=link_to "Message", new_message_path(), :class => "btn waves-light light-blue" %>
+        <p><%=link_to "Message", {:controller => "messages", :action=> "new", :product => @product.id}, :class => "btn waves-light light-blue" %></p>      
       </div>
     </div>
   </div>

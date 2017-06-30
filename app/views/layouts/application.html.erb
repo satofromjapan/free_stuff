@@ -15,7 +15,7 @@
         <a href="/" class="brand-logo left" style="margin-left: 50px;">FreeStuff</a>
         <ul class="right">
           <% if current_user %>
-            <li><a href="/messages">Messages <span class="new badge orange darken-4">0</span></a></li>
+            <li><a href="/messages">Messages <span class="new badge orange darken-4"><%=current_user.received_messages.count%></span></a></li>
             <li><a href="/products" class="center">Products</a></li>
             <li><a href="#!" class="dropdown-button" data-activates="menudrop"><%=current_user.first_name%><i class="material-icons right">view_list</i></a></li>
               <ul id="menudrop" class="dropdown-content" width="100" style="margin-top:65px;">
@@ -27,19 +27,20 @@
 
           <% else %>
             <li>
-              <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Login</a>
+              <a class="waves-effect waves-light btn modal-trigger" href="#logreg">Login</a>
             </li>
           <% end %>
         </ul>
       </div>
     </nav>
-    <%= yield %>
+    <main><%= yield %></main>
+
     <!-- Modal Structure -->
-    <div id="modal1" class="modal">
+    <div id="logreg" class="modal">
      <div class="modal-content">
        <ul class="collapsible" data-collapsible="accordion">
          <li>
-           <div class="collapsible-header">Login</div>
+           <div class="collapsible-header"> <i class="material-icons">people</i> Login</div>
            <div class="collapsible-body">
              <span>
                <div class="row">
@@ -64,7 +65,7 @@
            </div>
          </li>
          <li>
-           <div class="collapsible-header">Register</div>
+           <div class="collapsible-header"> <i class="material-icons">person_add</i> Register</div>
            <div class="collapsible-body">
              <span>
                <div class="row">
@@ -117,5 +118,10 @@
        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
      </div>
     </div>
+    <footer class="page-footer orange darken-4">
+      <div class="footer-copyright" style="padding-left: 5%">
+          © 2017 Copyright
+      </div>
+    </footer>
   </body>
 </html>

@@ -1,8 +1,8 @@
 <div class="container">
-  <ul class="collapsible" data-collapsible="accordion">
+  <ul class="collapsible" data-collapsible="accordion" >
     <% for message in @messages %>
     <li>
-      <div class="collapsible-header">
+      <div class="collapsible-header" onclick="<%=message.mark_as_read! :for => current_user%>">
         <div class="row">
           <div class="col s3">
             <p> <i class="material-icons">label</i> <%=message.sender.first_name%> <%=message.sender.last_name%></p>
@@ -16,9 +16,52 @@
         </div>
       </div>
       <div class="collapsible-body">
-        <span><%=message.content%></span>
+        <div class="row">
+          <div class="col s12">
+            <span><%=message.content%></span>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="right">
+            <a href="#reply" class="waves-effect waves-light btn">Reply <i class="material-icons right">send</i></a>
+          </div>
+        </div> -->
       </div>
     </li>
+
+    <!-- Modal Content -->
+    <div class="modal" id="reply">
+      <div class="modal-content">
+        <div class="row">
+          <div class=" input-field col s12">
+            <input disabled type="text" name="" value="<%=message.sender.first_name%> <%=message.sender.last_name%>" id="disabled">
+            <label for="disabled">To:</label>
+          </div>
+        </div>
+        <div class="row">
+          <form class="col s12" action="" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="message[receiver_id]" value="<%=message.sender.id%>">
+            <input type="hidden" name="message[sender_id]" value="<%=message.receiver.id%>">
+            <div class="row">
+              <div class="input-field col s12">
+                <input type="text" name="message[title]" value="RE: <%=message.title%>">
+                <label for="title">Title</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea name="message[content]" class="materialize-textarea"></textarea>
+                <label for="content">Message</label>
+              </div>
+            </div>
+            <div class="row">
+              <button type="submit" name="action" class="btn waves-effect waves-light" onclick="Materialize.toast('Message sent!')">Send <i class="material-icons right">send</i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <%end%>
   </ul>
 </div>

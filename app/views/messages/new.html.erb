@@ -1,6 +1,12 @@
 <div class="container">
   <h1>Send a message</h1>
   <div class="row">
+    <div class=" input-field col s12">
+      <input disabled type="text" name="" value="<%=@product.user.first_name%> <%=@product.user.last_name%>" id="disabled">
+      <label for="disabled">To:</label>
+    </div>
+  </div>
+  <div class="row">
     <form class="col s12" action="/messages" method="post">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <input type="hidden" name="message[receiver_id]" value="<%=@product.user.id%>">
@@ -13,7 +19,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <textarea name="message[content]" class="materialize-textarea"></textarea>
+          <textarea name="message[content]" class="materialize-textarea" placeholder="Make sure to include your email so that the seller can reply to you!"></textarea>
           <label for="content">Message</label>
         </div>
       </div>

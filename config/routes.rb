@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :users
   resources :products
   resources :messages
+  get '/read/:id' => 'messages#read'
 end
